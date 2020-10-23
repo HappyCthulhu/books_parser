@@ -1,0 +1,9 @@
+test.*
+include
+Scripts
+.idea
+__pycache__
+pip
+Lib
+*.xlsx
+pyvenv.cfg
