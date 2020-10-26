@@ -332,17 +332,17 @@ def get_data(tree):
             dimensions = re.split(r'\D', (''.join(re.sub(r' ', '', dimensions))))
             dimensions = list(filter(None, dimensions))
             if len(dimensions) == 1:
-                width = dimensions[0]
+                length = dimensions[0]
                 # print(f'Ширина: {width}')
             elif len(dimensions) == 2:
-                height = dimensions[0]
-                length = dimensions[1]
+                length = dimensions[0]
+                width = dimensions[1]
                 # print(f'Высота: {height}')
                 # print(f'Ширина: {width}')
             elif len(dimensions) == 3:
-                width = dimensions[2]
-                length = dimensions[1]
-                height = dimensions[0]
+                length = dimensions[0]
+                width = dimensions[1]
+                height = dimensions[2]
                 # print(f'Ширина: {width}')
                 # print(f'Высота: {height}')
                 # print(f'Длина: {length}')
@@ -434,7 +434,7 @@ def save_to_table(row_count, sheet, data_dict):
     sheet[f'CX{row_count}'].value = data_dict['editor']
     sheet[f'DA{row_count}'].value = data_dict['illustrator']
     if site_locators == BooksLocators:
-        cells = sheet[f'{row_count}']
+        cells = sheet[row_count]
         for cell in cells:
             cell.fill = PatternFill(fill_type='solid', start_color='ff0000')
     work_book.save('Books_info.xlsx')
