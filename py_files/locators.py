@@ -9,6 +9,7 @@ class LabirintLocators:
     dimensions_xpath = '//div[@class="dimensions"]/text()'
     cover_xpath = '//div[@class="popup-middle"]/div[1]/text()'
     author_xpath = '//div[@class="authors"]/a/text()'
+    colored_pics_xpath = '//div[@class="popup-middle"]//text()'
     annotation_xpath = '//div[@id="product-about"]//p//text()'
     publisher_xpath = '//div[@class="publisher"]/a/text()'
     series_xpath = '//div[@class="series"]/a/text()'
@@ -16,6 +17,7 @@ class LabirintLocators:
     orig_name_xpath = '//h2[@class="h2_eng"]/text()'
     editor_xpath = '//a[@data-event-label="editor"]/text()'
     illustrator_xpath = '//*[text()="Художник: "]/text()/following-sibling::a/text()'
+    genres_xpath = '//div[@id="thermometer-books"]//a/span/text()'
 
 
 class BooksLocators:
@@ -26,12 +28,13 @@ class BooksLocators:
     old_price_xpath = '//p[@class="p book-price-full-sale"]/text()'
     new_price_xpath = '//h3[@class="h3 book-price sale"]/text()[1]'
     weight_xpath = '//td[text()="Масса:"]/following-sibling::td/text()'
-    genre_xpath = '//span[@itemtype="http://schema.org/ListItem"]//following::span[@itemprop="name"]/text()'  # нужно взять последний элемент!
+    genre_xpath = '//div[@class="route-wrap"]/span[last()]/a/span/text()'  # нужно взять последний элемент!
     # text_dimensions_xpath = '//tbody/tr[7]/td[1]/text()'
     dimensions_xpath = '//tbody/tr[7]/td[2]/text()'
     author_xpath = '//div[@class="author-link-wrap"]//text()'
     cover_xpath = '//td[text()="Обложка:"]/following-sibling::td/text()'
-    annotation_xpath = '//div[@class="note"]/p/text()'
+    full_annotation_xpath = '//div[@class="all_note"]/*//text()'
+    short_annotation_xpath = '//div[@class="note"]/p/span/text()'
     publisher_xpath = '//ul[@class="isbn-list"]//li[4]/a/text()'
     series_xpath = '//table[@class="specifications_table"]//tr[2]/td[2]/a/text()'
     pages_xpath = '//td[text()="Объём:"]/following-sibling::td/text()'
