@@ -1,3 +1,4 @@
+import sys
 from datetime import datetime
 
 from loguru import logger
@@ -91,6 +92,10 @@ def get_book_link(isbn):
     else:
         store_locators = BooksLocators
         full_book_link = f'https://www.books.ru/search.php?s%5Btype_of_addon%5D=all&s%5Bquery%5D={isbn}&s%5Bgo%5D=1'
+        # book_page_response = requests.get(full_book_link).text
+        # book_page_tree = lxml.html.document_fromstring(book_page_response)
+        # filter_button = book_page_tree.xpath('//*[@id="button-filter"]')
+    # print(f'Ссылка: {full_book_link}')
     return store_locators, full_book_link
 
 
@@ -137,12 +142,12 @@ def define_which_sheet(years, tree):
     year_list = tree.xpath(site_locators.year_xpath)
     year = check_html_element_existing(year_list)
     year = ''.join(re.findall(r'\d', year))
-
+    # print(f'Год выпуска: {year}')
     if year in years:
-
+        # print('Год входит')
         return 'Second-hand', year
     else:
-
+        # print('Год не включен')
         return 'Букинистика', year
 
 
@@ -197,6 +202,7 @@ def get_data(tree):
         if name:
             if ':' in name:
                 name = re.findall(r': (.*)', name)[0]
+        # print(f'Название книги: {name}')
 
         logger.debug(f'Книга "{name}": {book_link}')
 
@@ -211,35 +217,41 @@ def get_data(tree):
                     break
                 else:
                     genre = ''
-        else:
-            genre = ''
 
-        annotation = tree.xpath(site_locators.annotation_xpath)
-        if annotation:
-            annotation = ''.join(annotation)
-        else:
-            annotation = ''
+
+            annotation = tree.xpath(site_locators.annotation_xpath)
+            if annotation:
+                annotation = ''.join(annotation)
+            else:
+                annotation = ''
+            # print(f'Аннотация: {annotation}')
+
+            # придумать, как присваивать жанрам пустое значение, если их нет
 
         no_price = tree.xpath(site_locators.no_price_xpath)
         if no_price:
-
+            # print('Цены нет')
             new_price = ''
             old_price = ''
         else:
             price_without_discount = tree.xpath(site_locators.price_without_discount_xpath)
             if price_without_discount:
                 new_price = price_without_discount[0]
-
+                # print(f'Скидки нет. Цена: {new_price}')
                 old_price = ''
             else:
                 old_price = tree.xpath(site_locators.old_price_xpath)[0]
                 new_price = tree.xpath(site_locators.new_price_xpath)[0]
+                # print(f'Цена без скидки: {old_price}')
+                # print(f'Цена со скидкой: {new_price}')
 
         orig_name_list = tree.xpath(site_locators.orig_name_xpath)
         orig_name = check_html_element_existing(orig_name_list)
+        # print(f'Оригинальное название: {orig_name}')
 
         editor_list = tree.xpath(site_locators.editor_xpath)
         editor = check_html_element_existing(editor_list)
+        # print(f'Редактор: {editor}')
 
         illustrator_list = tree.xpath(site_locators.illustrator_xpath)
         illustrator = check_html_element_existing(illustrator_list)
@@ -249,14 +261,18 @@ def get_data(tree):
 
     elif site_locators == BooksLocators:
         name = tree.xpath(site_locators.name_xpath)[0]
+        # print(f'Название книги: {name}')
 
         logger.debug(f'Книга "{name}": {book_link}')
 
         editor = ''
+        # print(f'Редактор: {editor}')
 
         illustrator = ''
+        # print(f'Иллюстратор: {illustrator}')
 
         orig_name = ''
+        # print(f'Оригинальное название: {orig_name}')
 
         full_annotation = tree.xpath(site_locators.full_annotation_xpath)
         if full_annotation:
@@ -264,6 +280,9 @@ def get_data(tree):
         else:
             short_annotation = tree.xpath(site_locators.short_annotation_xpath)
             annotation = check_html_element_existing(short_annotation)
+
+        # print(f'Аннотация: {annotation}')
+
 
         colored_pics = ''
 
@@ -280,12 +299,14 @@ def get_data(tree):
             price_without_discount = tree.xpath(site_locators.price_without_discount_xpath)[0]
             new_price = price_without_discount
             new_price = ''.join(re.findall(r'\d', new_price))
-
+            # print(f'Скидки нет. Цена: {new_price}')
             old_price = ''
         else:
             old_price = tree.xpath(site_locators.old_price_xpath)[0]
             new_price = tree.xpath(site_locators.new_price_xpath)[0]
             new_price = ''.join(re.findall(r'\d', new_price))
+            # print(f'Цена без скидки: {old_price}')
+            # print(f'Цена со скидкой: {new_price}')
 
         cover_list = tree.xpath(BooksLocators.cover_xpath)
         cover = check_html_element_existing(cover_list)
@@ -295,12 +316,15 @@ def get_data(tree):
             cover = 'Твердый переплет'
         else:
             cover = 'Надо пометить ячейку красным'
+        # print(f'Тип переплета: {cover}')
 
     weight_list = tree.xpath(site_locators.weight_xpath)
     weight = check_html_element_existing(weight_list)
     if weight:
         weight = ''.join(re.findall(r'\d', weight))
+    # print(f'Вес книги: {weight}')
 
+    # dimension_text_list = tree.xpath()
     dimension_list = tree.xpath(site_locators.dimensions_xpath)
     dimensions = check_html_element_existing(dimension_list)
     if dimensions:
@@ -309,32 +333,35 @@ def get_data(tree):
             dimensions = list(filter(None, dimensions))
             if len(dimensions) == 1:
                 length = dimensions[0]
-
+                # print(f'Ширина: {width}')
             elif len(dimensions) == 2:
                 length = dimensions[0]
                 width = dimensions[1]
-
-
+                # print(f'Высота: {height}')
+                # print(f'Ширина: {width}')
             elif len(dimensions) == 3:
                 length = dimensions[0]
                 width = dimensions[1]
                 height = dimensions[2]
-
-
-
+                # print(f'Ширина: {width}')
+                # print(f'Высота: {height}')
+                # print(f'Длина: {length}')
 
         else:
             width = ''
             height = ''
             length = ''
-
-
-
+            # print(f'Ширина: {width}')
+            # print(f'Высота: {height}')
+            # print(f'Длина: {length}')
 
     else:
         width = ''
         height = ''
         length = ''
+        # print(f'Ширина: {width}')
+        # print(f'Высота: {height}')
+        # print(f'Длина: {length}')
 
     author_code = tree.xpath(site_locators.author_xpath)
     author = ''
@@ -342,17 +369,30 @@ def get_data(tree):
         if re.search('[а-яА-Я]', elem):
             author += elem.strip()
             break
+    # print(f'Автор: {author}')
+
 
     publisher_list = tree.xpath(site_locators.publisher_xpath)
     publisher = check_html_element_existing(publisher_list)
+    # print(f'Издательство: {publisher}')
 
     series_list = tree.xpath(site_locators.series_xpath)
     series = check_html_element_existing(series_list)
+    # print(f'Серия: {series}')
 
     pages_list = tree.xpath(site_locators.pages_xpath)
     pages = check_html_element_existing(pages_list)
     if pages:
         pages = ''.join(re.findall(r'\d', pages))
+    # print(f'Количество страниц: {pages}')
+
+    # data_list = [NUMBER, '', name, new_price, old_price, '', '', '', '', BARCODE, weight, width, height,
+    #              length, PHOTO_LINK, '', '', '', '', ISBN, 'здесь будет жанр', '', author, '', COVER, '', '',
+    #              '', annotation, publisher, '', YEAR, series, '', '', '', '', '', '', '', '', pages, '', '', '',
+    #              'цветные иллюстрации', '', '',
+    #              LANG, orig_name, '', '', KEEPING, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
+    #              '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
+    #              '', '', '', '', '', '', '', '', '', '', '', editor, '', '', illustrator]
 
     data_dict = {'number': NUMBER, 'name': name, 'new_price': new_price, 'old_price': old_price, 'barcode': BARCODE,
                  'weight': weight, 'width': width, 'height': height, 'length': length, 'photo_link': PHOTO_LINK,
@@ -362,6 +402,7 @@ def get_data(tree):
                  'editor': editor, 'illustrator': illustrator, 'circulation': circulation, 'cover': cover}
 
     return data_dict
+    # return data_list
 
 
 def save_to_table(row_count, sheet, data_dict):
@@ -444,7 +485,7 @@ for row in sheet_ranges.rows:
         continue
 
     if not checking_year_exist(TREE):
-        ROWS_COUNT_NO_INFO = filing_empty_sheet(ROWS_COUNT_NO_INFO, 'Без года')
+        ROWS_COUNT_NO_INFO = filing_empty_sheet(ROWS_COUNT_NO_INFO, 'Без информации')
         continue
 
     sheet_name, YEAR = define_which_sheet(time_interval_list, TREE)
@@ -468,5 +509,3 @@ for row in sheet_ranges.rows:
     wasted_time = end_time - start_time
     logger.debug(f'Потрачено времени: {wasted_time}')
     logger.info(f'Книг обработано: {COUNT_OF_BOOKS}')
-
-logger.info('Скрипт завершил работу!')
