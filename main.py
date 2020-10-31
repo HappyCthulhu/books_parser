@@ -123,27 +123,32 @@ def get_site_tree(link):
     return tree
 
 
-def checking_year_exist(tree):
-    year_list = tree.xpath(site_locators.year_xpath)
-    year = check_html_element_existing(year_list)
-    if year:
-        return True
-    else:
-        logger.critical('Года нет. Пишем в "Без информации"')
-        return False
+# def checking_year_exist(tree):
+#     year_list = tree.xpath(site_locators.year_xpath)
+#     year = check_html_element_existing(year_list)
+#     if year:
+#         return True
+#     else:
+#         logger.critical('Года нет. Пишем в "Без информации"')
+#         return False
 
 
 def define_which_sheet(years, tree):
     year_list = tree.xpath(site_locators.year_xpath)
-    year = check_html_element_existing(year_list)
-    year = ''.join(re.findall(r'\d', year))
 
-    if year in years:
+    if year_list:
+        year = check_html_element_existing(year_list)
+        year = ''.join(re.findall(r'\d', year))
 
-        return 'Second-hand', year
+        if year in years:
+            return 'Second-hand', year
+
+        else:
+            return 'Букинистика', year
+
     else:
-
-        return 'Букинистика', year
+        year = ''
+        return 'Без года', year
 
 
 def get_cover_from_labirint(link_book):
@@ -309,11 +314,13 @@ def get_data(tree):
             dimensions = list(filter(None, dimensions))
             if len(dimensions) == 1:
                 length = dimensions[0]
+                width = ''
+                height = ''
 
             elif len(dimensions) == 2:
                 length = dimensions[0]
                 width = dimensions[1]
-
+                height = ''
 
             elif len(dimensions) == 3:
                 length = dimensions[0]
@@ -410,6 +417,7 @@ COUNT_BOOKS_RU_BOOKS = 0
 
 COUNT_ROW_BUKINISTICA_SHEET = 1
 COUNT_ROW_SECOND_HAND_SHEET = 1
+ROWS_COUNT_NO_YEAR = 1
 ROWS_COUNT_NO_INFO = 1
 
 start_time = datetime.now()
@@ -438,23 +446,30 @@ for row in sheet_ranges.rows:
     TREE = get_site_tree(book_link)
     time_interval_list = get_years_sequence(2011, 2025)
 
+    # книга есть на сайтах?
     if not check_for_book_existing(ISBN):
         ROWS_COUNT_NO_INFO = filing_empty_sheet(ROWS_COUNT_NO_INFO, 'Без информации')
         logger.critical('Книги нет на сайтах')
         continue
 
-    if not checking_year_exist(TREE):
-        ROWS_COUNT_NO_INFO = filing_empty_sheet(ROWS_COUNT_NO_INFO, 'Без года')
-        continue
-
+    # на сайте есть год?
     sheet_name, YEAR = define_which_sheet(time_interval_list, TREE)
+
+    # да
+    # if checking_year_exist(TREE):
+    # ROWS_COUNT_NO_INFO = filing_empty_sheet(ROWS_COUNT_NO_INFO, 'Без года')
 
     if sheet_name == 'Букинистика':
         COUNT_ROW_BUKINISTICA_SHEET += 1
         COUNT = COUNT_ROW_BUKINISTICA_SHEET
+
     elif sheet_name == 'Second-hand':
         COUNT_ROW_SECOND_HAND_SHEET += 1
         COUNT = COUNT_ROW_SECOND_HAND_SHEET
+
+    elif sheet_name == 'Без года':
+        ROWS_COUNT_NO_YEAR += 1
+        COUNT = ROWS_COUNT_NO_YEAR
 
     DATA_DICT = get_data(TREE)
 
