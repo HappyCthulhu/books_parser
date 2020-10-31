@@ -123,16 +123,6 @@ def get_site_tree(link):
     return tree
 
 
-# def checking_year_exist(tree):
-#     year_list = tree.xpath(site_locators.year_xpath)
-#     year = check_html_element_existing(year_list)
-#     if year:
-#         return True
-#     else:
-#         logger.critical('Года нет. Пишем в "Без информации"')
-#         return False
-
-
 def define_which_sheet(years, tree):
     year_list = tree.xpath(site_locators.year_xpath)
 
@@ -181,6 +171,7 @@ def get_cover_from_labirint(link_book):
 
     design_list = tree_cover.xpath(LabirintLocators.colored_pics_xpath)
     design_text = ''.join(design_list)
+
     if design_text:
         if 'Цветные' in design_text:
             colored_pics = 'Да'
@@ -446,18 +437,12 @@ for row in sheet_ranges.rows:
     TREE = get_site_tree(book_link)
     time_interval_list = get_years_sequence(2011, 2025)
 
-    # книга есть на сайтах?
     if not check_for_book_existing(ISBN):
         ROWS_COUNT_NO_INFO = filing_empty_sheet(ROWS_COUNT_NO_INFO, 'Без информации')
         logger.critical('Книги нет на сайтах')
         continue
 
-    # на сайте есть год?
     sheet_name, YEAR = define_which_sheet(time_interval_list, TREE)
-
-    # да
-    # if checking_year_exist(TREE):
-    # ROWS_COUNT_NO_INFO = filing_empty_sheet(ROWS_COUNT_NO_INFO, 'Без года')
 
     if sheet_name == 'Букинистика':
         COUNT_ROW_BUKINISTICA_SHEET += 1
