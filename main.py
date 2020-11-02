@@ -161,11 +161,12 @@ def get_cover_from_labirint(link_book):
     tree_cover = lxml.html.document_fromstring(response_for_cover_html)
 
     cover_text = tree_cover.xpath(LabirintLocators.cover_xpath)
-    if cover_text:
-        if 'твердая' or 'твёрдая' in cover_text:
-            cover = 'Твердый переплет'
-        elif 'мягкая' in cover_text:
-            cover = 'Мягкая обложка'
+    cover_text = check_html_element_existing(cover_text)
+
+    if 'твердая' in cover_text:
+        cover = 'Твердый переплет'
+    elif 'мягкий' in cover_text:
+        cover = 'Мягкая обложка'
     else:
         cover = ''
 
@@ -285,12 +286,14 @@ def get_data(tree):
 
         cover_list = tree.xpath(BooksLocators.cover_xpath)
         cover = check_html_element_existing(cover_list)
-        if 'мягкая' in cover:
-            cover = 'Мягкие переплет'
-        elif 'твердая' or 'твёрдая' in cover:
+
+        if 'твердая' in cover:
             cover = 'Твердый переплет'
+        elif 'мягкий' in cover:
+            cover = 'Мягкая обложка'
         else:
-            cover = 'Надо пометить ячейку красным'
+            cover = ''
+            # cover = 'Надо пометить ячейку красным'
 
     weight_list = tree.xpath(site_locators.weight_xpath)
     weight = check_html_element_existing(weight_list)
@@ -352,6 +355,12 @@ def get_data(tree):
     if pages:
         pages = ''.join(re.findall(r'\d', pages))
 
+    logger.debug(f'ISBN: {ISBN}')
+
+    if name == 'Десять негритят':
+        pass
+
+
     data_dict = {'number': NUMBER, 'name': name, 'new_price': new_price, 'old_price': old_price, 'barcode': BARCODE,
                  'weight': weight, 'width': width, 'height': height, 'length': length, 'photo_link': PHOTO_LINK,
                  'isbn': ISBN, 'genre': genre, 'author': author, 'annotation': annotation,
@@ -363,6 +372,9 @@ def get_data(tree):
 
 
 def save_to_table(row_count, sheet, data_dict):
+
+    if data_dict['name'] == 'Десять негритят':
+        pass
     sheet = work_book[sheet]
     sheet[f'A{row_count}'].value = data_dict['number']
     sheet[f'C{row_count}'].value = data_dict['name']
