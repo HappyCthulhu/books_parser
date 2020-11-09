@@ -8,7 +8,7 @@ import re
 
 from openpyxl.styles import PatternFill
 from urllib3.exceptions import InsecureRequestWarning
-from py_files.locators import LabirintLocators, BooksLocators
+from py_files.locators import LabirintLocators, BooksLocators, OzonLocators
 
 from py_files.some_functions import set_logger
 
@@ -16,10 +16,9 @@ from py_files.some_functions import set_logger
 def get_input_data(row_data):
     number = row_data[0].value
     isbn = row_data[1].value
-    photo_link = row_data[2].value
-    keeping = row_data[3].value
-    lang = row_data[4].value
-    barcode = row_data[5].value
+    keeping = row_data[2].value
+    lang = row_data[3].value
+    barcode = row_data[4].value
 
     if not keeping:
         keeping = 'Отличная'
@@ -35,14 +34,14 @@ def get_input_data(row_data):
     else:
         logger.critical(f'Что-то не так с языком. Значение lang: {lang}')
 
-    return number, isbn, photo_link, keeping, lang, barcode
+    return number, isbn, keeping, lang, barcode
 
 
 def filing_empty_sheet(rows_count, sheet):
     rows_count += 1
     sheet = work_book[sheet]
-    cell_range = sheet[f'A{rows_count}':f'F{rows_count}']
-    data_list = [NUMBER, ISBN, PHOTO_LINK, KEEPING, LANG, BARCODE]
+    cell_range = sheet[f'A{rows_count}':f'D{rows_count}']
+    data_list = [NUMBER, ISBN, KEEPING, LANG, BARCODE]
 
     for each_row in cell_range:
         for each_cell in each_row:
@@ -76,6 +75,25 @@ def check_for_book_existing(isbn):
         if filter_button:
             return False
     return True
+
+
+def get_photo_link(isbn_code):
+    search_book_by_ISBN_link = f'https://www.ozon.ru/search/?from_global=true&text={isbn_code}'
+    header = {
+        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36',
+    }
+    html_text = requests.get(search_book_by_ISBN_link, headers=header, verify=False).text
+    tree_ozon_search = lxml.html.document_fromstring(html_text)
+    book_exist = tree_ozon_search.xpath('//div[@class="b6r7"]/strong/text()')
+    if book_exist:
+        photo_page_link = 'https://www.ozon.ru' + tree_ozon_search.xpath(OzonLocators.product_page_link)[0].attrib['href']
+        logger.debug(f'Есть на OZON: {photo_page_link}')
+        html_text = requests.get(photo_page_link, verify=False).text
+        tree_page = lxml.html.document_fromstring(html_text)
+        photo_link = tree_page.xpath(OzonLocators.photo_link)[0].attrib['src']
+        return photo_link
+    else:
+        return ''
 
 
 def get_book_link(isbn):
@@ -163,12 +181,10 @@ def get_cover_from_labirint(link_book):
     cover_text = tree_cover.xpath(LabirintLocators.cover_xpath)
     cover_text = check_html_element_existing(cover_text)
 
-    if 'твердая' in cover_text:
-        cover = 'Твердый переплет'
-    elif 'мягкий' in cover_text:
+    if 'мягкий' in cover_text:
         cover = 'Мягкая обложка'
     else:
-        cover = ''
+        cover = 'Твердый переплет'
 
     design_list = tree_cover.xpath(LabirintLocators.colored_pics_xpath)
     design_text = ''.join(design_list)
@@ -287,13 +303,10 @@ def get_data(tree):
         cover_list = tree.xpath(BooksLocators.cover_xpath)
         cover = check_html_element_existing(cover_list)
 
-        if 'твердая' in cover:
-            cover = 'Твердый переплет'
-        elif 'мягкий' in cover:
+        if 'мягкий' in cover:
             cover = 'Мягкая обложка'
         else:
-            cover = ''
-            # cover = 'Надо пометить ячейку красным'
+            cover = 'Твердый переплет'
 
     weight_list = tree.xpath(site_locators.weight_xpath)
     weight = check_html_element_existing(weight_list)
@@ -360,9 +373,8 @@ def get_data(tree):
     if name == 'Десять негритят':
         pass
 
-
     data_dict = {'number': NUMBER, 'name': name, 'new_price': new_price, 'old_price': old_price, 'barcode': BARCODE,
-                 'weight': weight, 'width': width, 'height': height, 'length': length, 'photo_link': PHOTO_LINK,
+                 'weight': weight, 'width': width, 'height': height, 'length': length, 'photo_link': photo_link,
                  'isbn': ISBN, 'genre': genre, 'author': author, 'annotation': annotation,
                  'publisher': publisher, 'year': YEAR, 'series': series, 'pages': pages,
                  'colored_pics': colored_pics, 'lang': LANG, 'orig_name': orig_name, 'keeping': KEEPING,
@@ -372,7 +384,6 @@ def get_data(tree):
 
 
 def save_to_table(row_count, sheet, data_dict):
-
     if data_dict['name'] == 'Десять негритят':
         pass
     sheet = work_book[sheet]
@@ -437,7 +448,9 @@ for row in sheet_ranges.rows:
         first_row_check += 1
         continue
     COUNT_OF_BOOKS += 1
-    NUMBER, ISBN, PHOTO_LINK, KEEPING, LANG, BARCODE = get_input_data(row)
+    NUMBER, ISBN, KEEPING, LANG, BARCODE = get_input_data(row)
+
+    photo_link = get_photo_link(ISBN)
 
     site_locators, book_link = get_book_link(ISBN)
 

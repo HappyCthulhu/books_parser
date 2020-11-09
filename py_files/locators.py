@@ -39,3 +39,9 @@ class BooksLocators:
     series_xpath = '//table[@class="specifications_table"]//tr[2]/td[2]/a/text()'
     pages_xpath = '//td[text()="Объём:"]/following-sibling::td/text()'
     circulation = '//td[text()="Тираж:"]/following-sibling::td/text()'
+
+
+class OzonLocators:
+    exist_text = '//div[@class="b6r7"]/strong/text()'
+    product_page_link = '//div[@class="container b6e3"]//a[2]'
+    photo_link = '//div[@class="a8n3"]/div/img'
