@@ -53,5 +53,5 @@ class OzonLocators:
     # found_items_1 = '//div[contains(text(), "По запросу")]' # проверка наличия книги видимо
     isbn_exist = '//div[@class="b6r7"]/strong/text()' # проверка наличия книги видимо
 
-    price = '//div[@class="client-state"]/div[@id="state-addToFavorite-347772-lfskdjault-1"]/@data-state'
+    price = '//div[@class="client-state"]/div[@id="state-addToFavorite-347772-default-1"]/@data-state'
     # price_ozon_premium = '//div[@class="c8x9"]/span[@class="b0r3"]/span[contains(text(), "Цена с")]'
