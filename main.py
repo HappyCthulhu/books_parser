@@ -761,7 +761,7 @@ for row in sheet_ranges.rows:
             #     DATA_DICT['column_D_price'] = ''
 
             # столбец F
-            if DATA_DICT['column_D_price']:
+            if DATA_DICT.get('column_D_price'):
                 DATA_DICT['column_F_ozon_price'] = calculate_price_ozon_for_column_f(DATA_DICT['column_D_price'],
                                                                                      volume)
 
