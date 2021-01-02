@@ -1,0 +1,111 @@
+Все сломалось
+Type: <class 'AttributeError'>
+Value: module 'requests' has no attribute 'urllib3'
+Traceback:   File "/home/valera/PycharmProjects/books_parser/main.py", line 636, in <module>
+    requests.urllib3.disable_warnings(category=InsecureRequestWarning)
+Все сломалось
+Type: <class 'FileNotFoundError'>
+Value: [Errno 2] No such file or directory: 'Books_info_1.xlsx'
+Traceback:   File "/home/valera/PycharmProjects/books_parser/main.py", line 638, in <module>
+    work_book = load_workbook('Books_info_1.xlsx')
+
+  File "/home/valera/.local/lib/python3.8/site-packages/openpyxl/reader/excel.py", line 313, in load_workbook
+    reader = ExcelReader(filename, read_only, keep_vba,
+
+  File "/home/valera/.local/lib/python3.8/site-packages/openpyxl/reader/excel.py", line 124, in __init__
+    self.archive = _validate_archive(fn)
+
+  File "/home/valera/.local/lib/python3.8/site-packages/openpyxl/reader/excel.py", line 96, in _validate_archive
+    archive = ZipFile(filename, 'r')
+
+  File "/usr/lib/python3.8/zipfile.py", line 1251, in __init__
+    self.fp = io.open(file, filemode)
+Все сломалось
+Type: <class 'FileNotFoundError'>
+Value: [Errno 2] No such file or directory: 'Books_info_1.xlsx'
+Traceback:   File "/home/valera/PycharmProjects/books_parser/main.py", line 638, in <module>
+    work_book = load_workbook('Books_info_1.xlsx')
+
+  File "/home/valera/.local/lib/python3.8/site-packages/openpyxl/reader/excel.py", line 313, in load_workbook
+    reader = ExcelReader(filename, read_only, keep_vba,
+
+  File "/home/valera/.local/lib/python3.8/site-packages/openpyxl/reader/excel.py", line 124, in __init__
+    self.archive = _validate_archive(fn)
+
+  File "/home/valera/.local/lib/python3.8/site-packages/openpyxl/reader/excel.py", line 96, in _validate_archive
+    archive = ZipFile(filename, 'r')
+
+  File "/usr/lib/python3.8/zipfile.py", line 1251, in __init__
+    self.fp = io.open(file, filemode)
+Все сломалось
+Type: <class 'FileNotFoundError'>
+Value: [Errno 2] No such file or directory: 'Genres.xlsx'
+Traceback:   File "/home/valera/PycharmProjects/books_parser/main.py", line 641, in <module>
+    GENRES_LABIRINT_LIST = get_data_from_genres_file('Genres.xlsx')
+
+  File "/home/valera/PycharmProjects/books_parser/main.py", line 258, in get_data_from_genres_file
+    genres_file = load_workbook(genres_file_name)
+
+  File "/home/valera/.local/lib/python3.8/site-packages/openpyxl/reader/excel.py", line 313, in load_workbook
+    reader = ExcelReader(filename, read_only, keep_vba,
+
+  File "/home/valera/.local/lib/python3.8/site-packages/openpyxl/reader/excel.py", line 124, in __init__
+    self.archive = _validate_archive(fn)
+
+  File "/home/valera/.local/lib/python3.8/site-packages/openpyxl/reader/excel.py", line 96, in _validate_archive
+    archive = ZipFile(filename, 'r')
+
+  File "/usr/lib/python3.8/zipfile.py", line 1251, in __init__
+    self.fp = io.open(file, filemode)
+Все сломалось
+Type: <class 'KeyboardInterrupt'>
+Value: 
+Traceback:   File "/home/valera/PycharmProjects/books_parser/main.py", line 671, in <module>
+    TREE = get_site_tree(book_link)
+
+  File "/home/valera/PycharmProjects/books_parser/main.py", line 281, in get_site_tree
+    html_text = requests.get(link, verify=False).text
+
+  File "/home/valera/.local/lib/python3.8/site-packages/requests/api.py", line 76, in get
+    return request('get', url, params=params, **kwargs)
+
+  File "/home/valera/.local/lib/python3.8/site-packages/requests/api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+
+  File "/home/valera/.local/lib/python3.8/site-packages/requests/sessions.py", line 530, in request
+    resp = self.send(prep, **send_kwargs)
+
+  File "/home/valera/.local/lib/python3.8/site-packages/requests/sessions.py", line 643, in send
+    r = adapter.send(request, **kwargs)
+
+  File "/home/valera/.local/lib/python3.8/site-packages/requests/adapters.py", line 439, in send
+    resp = conn.urlopen(
+
+  File "/home/valera/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 670, in urlopen
+    httplib_response = self._make_request(
+
+  File "/home/valera/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 426, in _make_request
+    six.raise_from(e, None)
+
+  File "<string>", line 3, in raise_from
+
+  File "/home/valera/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 421, in _make_request
+    httplib_response = conn.getresponse()
+
+  File "/usr/lib/python3.8/http/client.py", line 1347, in getresponse
+    response.begin()
+
+  File "/usr/lib/python3.8/http/client.py", line 307, in begin
+    version, status, reason = self._read_status()
+
+  File "/usr/lib/python3.8/http/client.py", line 268, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+
+  File "/usr/lib/python3.8/socket.py", line 669, in readinto
+    return self._sock.recv_into(b)
+
+  File "/usr/lib/python3.8/ssl.py", line 1241, in recv_into
+    return self.read(nbytes, buffer)
+
+  File "/usr/lib/python3.8/ssl.py", line 1099, in read
+    return self._sslobj.read(len, buffer)

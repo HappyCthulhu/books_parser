@@ -1,0 +1,233 @@
+Все сломалось
+Type: <class 'AttributeError'>
+Value: module 'requests' has no attribute 'urllib3'
+Traceback:   File "/home/valera/PycharmProjects/books_parser/main.py", line 636, in <module>
+    requests.urllib3.disable_warnings(category=InsecureRequestWarning)
+Все сломалось
+Type: <class 'FileNotFoundError'>
+Value: [Errno 2] No such file or directory: 'Books_info_1.xlsx'
+Traceback:   File "/home/valera/PycharmProjects/books_parser/main.py", line 638, in <module>
+    work_book = load_workbook('Books_info_1.xlsx')
+
+  File "/home/valera/.local/lib/python3.8/site-packages/openpyxl/reader/excel.py", line 313, in load_workbook
+    reader = ExcelReader(filename, read_only, keep_vba,
+
+  File "/home/valera/.local/lib/python3.8/site-packages/openpyxl/reader/excel.py", line 124, in __init__
+    self.archive = _validate_archive(fn)
+
+  File "/home/valera/.local/lib/python3.8/site-packages/openpyxl/reader/excel.py", line 96, in _validate_archive
+    archive = ZipFile(filename, 'r')
+
+  File "/usr/lib/python3.8/zipfile.py", line 1251, in __init__
+    self.fp = io.open(file, filemode)
+Все сломалось
+Type: <class 'FileNotFoundError'>
+Value: [Errno 2] No such file or directory: 'Books_info_1.xlsx'
+Traceback:   File "/home/valera/PycharmProjects/books_parser/main.py", line 638, in <module>
+    work_book = load_workbook('Books_info_1.xlsx')
+
+  File "/home/valera/.local/lib/python3.8/site-packages/openpyxl/reader/excel.py", line 313, in load_workbook
+    reader = ExcelReader(filename, read_only, keep_vba,
+
+  File "/home/valera/.local/lib/python3.8/site-packages/openpyxl/reader/excel.py", line 124, in __init__
+    self.archive = _validate_archive(fn)
+
+  File "/home/valera/.local/lib/python3.8/site-packages/openpyxl/reader/excel.py", line 96, in _validate_archive
+    archive = ZipFile(filename, 'r')
+
+  File "/usr/lib/python3.8/zipfile.py", line 1251, in __init__
+    self.fp = io.open(file, filemode)
+Все сломалось
+Type: <class 'FileNotFoundError'>
+Value: [Errno 2] No such file or directory: 'Genres.xlsx'
+Traceback:   File "/home/valera/PycharmProjects/books_parser/main.py", line 641, in <module>
+    GENRES_LABIRINT_LIST = get_data_from_genres_file('Genres.xlsx')
+
+  File "/home/valera/PycharmProjects/books_parser/main.py", line 258, in get_data_from_genres_file
+    genres_file = load_workbook(genres_file_name)
+
+  File "/home/valera/.local/lib/python3.8/site-packages/openpyxl/reader/excel.py", line 313, in load_workbook
+    reader = ExcelReader(filename, read_only, keep_vba,
+
+  File "/home/valera/.local/lib/python3.8/site-packages/openpyxl/reader/excel.py", line 124, in __init__
+    self.archive = _validate_archive(fn)
+
+  File "/home/valera/.local/lib/python3.8/site-packages/openpyxl/reader/excel.py", line 96, in _validate_archive
+    archive = ZipFile(filename, 'r')
+
+  File "/usr/lib/python3.8/zipfile.py", line 1251, in __init__
+    self.fp = io.open(file, filemode)
+2020-12-29 19:22:14.709 | DEBUG    | __main__:get_link_to_ozon_page:93 - Ссылка на страницу поиска книги: https://www.ozon.ru/search/?from_global=true&text=5-18-000887-5
+2020-12-29 19:22:30.284 | DEBUG    | __main__:get_link_to_ozon_page:99 - ISBN: 5-18-000887-5
+2020-12-29 19:22:30.285 | DEBUG    | __main__:get_link_to_ozon_page:111 - Ссылка на книгу Ozon: https://www.ozon.ru/product/pervobytnyy-chelovek-derem-silviya-219457380/?asb=rRMf0kStkuetkxSD5dUOx8obs2xkxffL24QoRvVTmDM%253D
+2020-12-29 19:22:35.358 | DEBUG    | __main__:get_data:356 - Книга "Первобытный человек": https://www.labirint.ru/books/100171/
+2020-12-29 19:22:37.114 | DEBUG    | __main__:<module>:801 - Потрачено времени: 0:00:26.114292
+2020-12-29 19:22:37.114 | INFO     | __main__:<module>:802 - Книг обработано: 1/463
+2020-12-29 19:22:38.934 | DEBUG    | __main__:get_link_to_ozon_page:93 - Ссылка на страницу поиска книги: https://www.ozon.ru/search/?from_global=true&text=978-5-699-77745-7
+2020-12-29 19:22:44.372 | DEBUG    | __main__:get_data:356 - Книга "Сказки крольчихи Марты": https://www.labirint.ru/books/471444/
+2020-12-29 19:22:44.504 | DEBUG    | __main__:get_data:540 - ISBN: 978-5-699-77745-7
+2020-12-29 19:22:45.935 | DEBUG    | __main__:<module>:801 - Потрачено времени: 0:00:34.934948
+2020-12-29 19:22:45.935 | INFO     | __main__:<module>:802 - Книг обработано: 2/463
+2020-12-29 19:22:48.089 | DEBUG    | __main__:get_link_to_ozon_page:93 - Ссылка на страницу поиска книги: https://www.ozon.ru/search/?from_global=true&text=978-5-98797-099-7
+2020-12-29 19:22:54.308 | DEBUG    | __main__:get_link_to_ozon_page:99 - ISBN: 978-5-98797-099-7
+2020-12-29 19:22:54.309 | DEBUG    | __main__:get_link_to_ozon_page:111 - Ссылка на книгу Ozon: https://www.ozon.ru/context/detail/id/31700826/
+2020-12-29 19:23:04.813 | DEBUG    | __main__:get_data:356 - Книга "Территория": https://www.labirint.ru/books/476479/
+2020-12-29 19:23:06.553 | DEBUG    | __main__:<module>:801 - Потрачено времени: 0:00:55.553794
+2020-12-29 19:23:06.554 | INFO     | __main__:<module>:802 - Книг обработано: 3/463
+2020-12-29 19:23:08.986 | DEBUG    | __main__:get_link_to_ozon_page:93 - Ссылка на страницу поиска книги: https://www.ozon.ru/search/?from_global=true&text=978-5-9922-2603-4
+2020-12-29 19:23:14.427 | DEBUG    | __main__:get_data:356 - Книга "Камо грядеши. Роман в 3-х частях из эпохи Нерона": https://www.labirint.ru/books/623463/
+2020-12-29 19:23:14.559 | DEBUG    | __main__:get_data:540 - ISBN: 978-5-9922-2603-4
+2020-12-29 19:23:16.043 | DEBUG    | __main__:<module>:801 - Потрачено времени: 0:01:05.042975
+2020-12-29 19:23:16.043 | INFO     | __main__:<module>:802 - Книг обработано: 4/463
+2020-12-29 19:23:17.902 | DEBUG    | __main__:get_link_to_ozon_page:93 - Ссылка на страницу поиска книги: https://www.ozon.ru/search/?from_global=true&text=978-5-00117-631-2
+2020-12-29 19:23:23.418 | DEBUG    | __main__:get_link_to_ozon_page:99 - ISBN: 978-5-00117-631-2
+2020-12-29 19:23:23.420 | DEBUG    | __main__:get_link_to_ozon_page:111 - Ссылка на книгу Ozon: https://www.ozon.ru/context/detail/id/147120254/?asb=c6dg%252Bqe4tDZ%252BTT8JbCXN%252FAp1ITBpJPfXokpCm%252FN%252Fv5U%253D
+2020-12-29 19:23:29.156 | DEBUG    | __main__:get_data:356 - Книга "Биохакинг мозга. Проверенный план максимальной прокачки вашего мозга за две недели": https://www.labirint.ru/books/660048/
+2020-12-29 19:23:30.791 | DEBUG    | __main__:<module>:801 - Потрачено времени: 0:01:19.791650
+2020-12-29 19:23:30.792 | INFO     | __main__:<module>:802 - Книг обработано: 5/463
+2020-12-29 19:23:34.885 | DEBUG    | __main__:get_link_to_ozon_page:93 - Ссылка на страницу поиска книги: https://www.ozon.ru/search/?from_global=true&text=978-5-9614-6087-2
+2020-12-29 19:23:40.684 | DEBUG    | __main__:get_link_to_ozon_page:99 - ISBN: 978-5-9614-6087-2
+2020-12-29 19:23:40.685 | DEBUG    | __main__:get_link_to_ozon_page:111 - Ссылка на книгу Ozon: https://www.ozon.ru/context/detail/id/29722259/
+2020-12-29 19:23:45.988 | DEBUG    | __main__:get_data:423 - Книга "От нуля к единице: Как создать стартап, который изменит будущее. 3-е изд": https://www.books.ru/search.php?s%5Btype_of_addon%5D=&s%5Bquery%5D=978-5-9614-6087-2&s%5Bgo%5D=1
+2020-12-29 19:23:47.499 | DEBUG    | __main__:<module>:801 - Потрачено времени: 0:01:36.499147
+2020-12-29 19:23:47.500 | INFO     | __main__:<module>:802 - Книг обработано: 6/463
+2020-12-29 19:23:49.614 | DEBUG    | __main__:get_link_to_ozon_page:93 - Ссылка на страницу поиска книги: https://www.ozon.ru/search/?from_global=true&text=978-5-9614-4384-4
+2020-12-29 19:23:55.746 | DEBUG    | __main__:get_link_to_ozon_page:99 - ISBN: 978-5-9614-4384-4
+2020-12-29 19:23:55.747 | DEBUG    | __main__:get_link_to_ozon_page:111 - Ссылка на книгу Ozon: https://www.ozon.ru/context/detail/id/20000604/
+2020-12-29 19:24:01.463 | DEBUG    | __main__:get_data:356 - Книга "Революция Гайдара: История реформ 90-х из первых рук": https://www.labirint.ru/books/385138/
+2020-12-29 19:24:03.021 | DEBUG    | __main__:<module>:801 - Потрачено времени: 0:01:52.021324
+2020-12-29 19:24:03.021 | INFO     | __main__:<module>:802 - Книг обработано: 7/463
+2020-12-29 19:24:05.297 | DEBUG    | __main__:get_link_to_ozon_page:93 - Ссылка на страницу поиска книги: https://www.ozon.ru/search/?from_global=true&text=978-5-9524-4412-6
+2020-12-29 19:24:11.007 | DEBUG    | __main__:get_link_to_ozon_page:99 - ISBN: 978-5-9524-4412-6
+2020-12-29 19:24:11.008 | DEBUG    | __main__:get_link_to_ozon_page:111 - Ссылка на книгу Ozon: https://www.ozon.ru/context/detail/id/29408205/
+2020-12-29 19:24:16.625 | DEBUG    | __main__:get_data:356 - Книга "Убийственно просто": https://www.labirint.ru/books/119047/
+2020-12-29 19:24:18.257 | DEBUG    | __main__:<module>:801 - Потрачено времени: 0:02:07.257380
+2020-12-29 19:24:18.257 | INFO     | __main__:<module>:802 - Книг обработано: 8/463
+2020-12-29 19:24:19.947 | DEBUG    | __main__:get_link_to_ozon_page:93 - Ссылка на страницу поиска книги: https://www.ozon.ru/search/?from_global=true&text=5-900502-35-X
+2020-12-29 19:24:25.848 | DEBUG    | __main__:get_data:356 - Книга "Беседа мудрого старца с девицей юной о чувствах и словах": https://www.labirint.ru/books/286198/
+2020-12-29 19:24:25.973 | DEBUG    | __main__:get_data:540 - ISBN: 5-900502-35-X
+2020-12-29 19:24:27.477 | DEBUG    | __main__:<module>:801 - Потрачено времени: 0:02:16.477536
+2020-12-29 19:24:27.478 | INFO     | __main__:<module>:802 - Книг обработано: 9/463
+2020-12-29 19:24:30.070 | DEBUG    | __main__:get_link_to_ozon_page:93 - Ссылка на страницу поиска книги: https://www.ozon.ru/search/?from_global=true&text=978-5-271-38532-2
+2020-12-29 19:24:36.711 | DEBUG    | __main__:get_data:356 - Книга "Дальше - шум. Слушая XX век": https://www.labirint.ru/books/339870/
+2020-12-29 19:24:36.841 | DEBUG    | __main__:get_data:540 - ISBN: 978-5-271-38532-2
+2020-12-29 19:24:38.434 | DEBUG    | __main__:<module>:801 - Потрачено времени: 0:02:27.434375
+2020-12-29 19:24:38.435 | INFO     | __main__:<module>:802 - Книг обработано: 10/463
+2020-12-29 19:24:41.681 | DEBUG    | __main__:get_link_to_ozon_page:93 - Ссылка на страницу поиска книги: https://www.ozon.ru/search/?from_global=true&text=978-5-91657-361-9
+2020-12-29 19:24:47.102 | DEBUG    | __main__:get_data:356 - Книга "Миллиардер из Кремниевой долины. История соучредителя Microsoft": https://www.labirint.ru/books/335580/
+2020-12-29 19:24:47.229 | DEBUG    | __main__:get_data:540 - ISBN: 978-5-91657-361-9
+2020-12-29 19:24:48.699 | DEBUG    | __main__:<module>:801 - Потрачено времени: 0:02:37.699037
+2020-12-29 19:24:48.699 | INFO     | __main__:<module>:802 - Книг обработано: 11/463
+2020-12-29 19:24:50.458 | DEBUG    | __main__:get_link_to_ozon_page:93 - Ссылка на страницу поиска книги: https://www.ozon.ru/search/?from_global=true&text=978-5-271-39378-5
+2020-12-29 19:24:55.890 | DEBUG    | __main__:get_link_to_ozon_page:99 - ISBN: 978-5-271-39378-5
+2020-12-29 19:24:55.891 | DEBUG    | __main__:get_link_to_ozon_page:111 - Ссылка на книгу Ozon: https://www.ozon.ru/context/detail/id/28273679/?asb=7FTTGVof9n60J5ir8l3jDCLjtUiXfgR26drWTKn3qzE%253D
+2020-12-29 19:25:01.352 | DEBUG    | __main__:get_data:356 - Книга "Стив Джобс. Биография": https://www.labirint.ru/books/307571/
+2020-12-29 19:25:03.043 | DEBUG    | __main__:<module>:801 - Потрачено времени: 0:02:52.043690
+2020-12-29 19:25:03.044 | INFO     | __main__:<module>:802 - Книг обработано: 12/463
+2020-12-29 19:25:04.915 | DEBUG    | __main__:get_link_to_ozon_page:93 - Ссылка на страницу поиска книги: https://www.ozon.ru/search/?from_global=true&text=978-5-699-17104-0
+2020-12-29 19:25:11.227 | DEBUG    | __main__:get_link_to_ozon_page:99 - ISBN: 978-5-699-17104-0
+2020-12-29 19:25:11.229 | DEBUG    | __main__:get_link_to_ozon_page:111 - Ссылка на книгу Ozon: https://www.ozon.ru/product/sinyaya-ptitsa-meterlink-moris-215685984/
+2020-12-29 19:25:16.736 | DEBUG    | __main__:get_data:356 - Книга "Синяя птица: Сказки": https://www.labirint.ru/books/123523/
+2020-12-29 19:25:18.427 | DEBUG    | __main__:<module>:801 - Потрачено времени: 0:03:07.426966
+2020-12-29 19:25:18.427 | INFO     | __main__:<module>:802 - Книг обработано: 13/463
+Все сломалось
+Type: <class 'KeyboardInterrupt'>
+Value: 
+Traceback:   File "/home/valera/PycharmProjects/books_parser/main.py", line 671, in <module>
+    TREE = get_site_tree(book_link)
+
+  File "/home/valera/PycharmProjects/books_parser/main.py", line 281, in get_site_tree
+    html_text = requests.get(link, verify=False).text
+
+  File "/home/valera/.local/lib/python3.8/site-packages/requests/api.py", line 76, in get
+    return request('get', url, params=params, **kwargs)
+
+  File "/home/valera/.local/lib/python3.8/site-packages/requests/api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+
+  File "/home/valera/.local/lib/python3.8/site-packages/requests/sessions.py", line 530, in request
+    resp = self.send(prep, **send_kwargs)
+
+  File "/home/valera/.local/lib/python3.8/site-packages/requests/sessions.py", line 643, in send
+    r = adapter.send(request, **kwargs)
+
+  File "/home/valera/.local/lib/python3.8/site-packages/requests/adapters.py", line 439, in send
+    resp = conn.urlopen(
+
+  File "/home/valera/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 670, in urlopen
+    httplib_response = self._make_request(
+
+  File "/home/valera/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 426, in _make_request
+    six.raise_from(e, None)
+
+  File "<string>", line 3, in raise_from
+
+  File "/home/valera/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 421, in _make_request
+    httplib_response = conn.getresponse()
+
+  File "/usr/lib/python3.8/http/client.py", line 1347, in getresponse
+    response.begin()
+
+  File "/usr/lib/python3.8/http/client.py", line 307, in begin
+    version, status, reason = self._read_status()
+
+  File "/usr/lib/python3.8/http/client.py", line 268, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+
+  File "/usr/lib/python3.8/socket.py", line 669, in readinto
+    return self._sock.recv_into(b)
+
+  File "/usr/lib/python3.8/ssl.py", line 1241, in recv_into
+    return self.read(nbytes, buffer)
+
+  File "/usr/lib/python3.8/ssl.py", line 1099, in read
+    return self._sslobj.read(len, buffer)
+2020-12-29 21:03:44.200 | DEBUG    | __main__:get_link_to_ozon_page:93 - Ссылка на страницу поиска книги: https://www.ozon.ru/search/?from_global=true&text=5-18-000887-5
+2020-12-29 21:03:59.940 | DEBUG    | __main__:get_link_to_ozon_page:99 - ISBN: 5-18-000887-5
+2020-12-29 21:03:59.941 | DEBUG    | __main__:get_link_to_ozon_page:111 - Ссылка на книгу Ozon: https://www.ozon.ru/product/pervobytnyy-chelovek-derem-silviya-219457380/?asb=VSroXKI68hRHrOeHLj5mW0FAt7a0Eklb22clpIz0n4Y%253D
+2020-12-29 21:04:05.034 | DEBUG    | __main__:get_data:356 - Книга "Первобытный человек": https://www.labirint.ru/books/100171/
+2020-12-29 21:23:34.375 | DEBUG    | __main__:<module>:801 - Потрачено времени: 0:19:55.166665
+2020-12-29 21:23:34.376 | INFO     | __main__:<module>:802 - Книг обработано: 1/463
+2020-12-29 21:23:36.238 | DEBUG    | __main__:get_link_to_ozon_page:93 - Ссылка на страницу поиска книги: https://www.ozon.ru/search/?from_global=true&text=978-5-699-77745-7
+2020-12-29 21:23:48.056 | DEBUG    | __main__:get_link_to_ozon_page:93 - Ссылка на страницу поиска книги: https://www.ozon.ru/search/?from_global=true&text=5-18-000887-5
+2020-12-29 21:24:03.408 | DEBUG    | __main__:get_link_to_ozon_page:99 - ISBN: 5-18-000887-5
+2020-12-29 21:24:03.409 | DEBUG    | __main__:get_link_to_ozon_page:111 - Ссылка на книгу Ozon: https://www.ozon.ru/product/pervobytnyy-chelovek-derem-silviya-219457380/?asb=dTZgd6MwZuF%252BuZGsrL4b8%252FZpVYb9nS8kdRdAoFJKcB4%253D
+2020-12-29 21:24:08.504 | DEBUG    | __main__:get_data:356 - Книга "Первобытный человек": https://www.labirint.ru/books/100171/
+2020-12-29 21:24:36.642 | DEBUG    | __main__:<module>:801 - Потрачено времени: 0:00:52.734839
+2020-12-29 21:24:36.643 | INFO     | __main__:<module>:802 - Книг обработано: 1/463
+2020-12-29 21:24:37.895 | DEBUG    | __main__:get_link_to_ozon_page:93 - Ссылка на страницу поиска книги: https://www.ozon.ru/search/?from_global=true&text=978-5-699-77745-7
+2020-12-29 21:24:43.278 | DEBUG    | __main__:get_data:356 - Книга "Сказки крольчихи Марты": https://www.labirint.ru/books/471444/
+2020-12-29 21:24:43.395 | DEBUG    | __main__:get_data:540 - ISBN: 978-5-699-77745-7
+2020-12-29 21:25:30.062 | DEBUG    | __main__:get_link_to_ozon_page:93 - Ссылка на страницу поиска книги: https://www.ozon.ru/search/?from_global=true&text=5-18-000887-5
+2020-12-29 21:25:45.435 | DEBUG    | __main__:get_link_to_ozon_page:99 - ISBN: 5-18-000887-5
+2020-12-29 21:25:45.436 | DEBUG    | __main__:get_link_to_ozon_page:111 - Ссылка на книгу Ozon: https://www.ozon.ru/product/pervobytnyy-chelovek-derem-silviya-219457380/
+2020-12-29 21:25:51.624 | DEBUG    | __main__:get_data:356 - Книга "Первобытный человек": https://www.labirint.ru/books/100171/
+2020-12-29 21:31:54.522 | DEBUG    | __main__:get_link_to_ozon_page:93 - Ссылка на страницу поиска книги: https://www.ozon.ru/search/?from_global=true&text=5-18-000887-5
+2020-12-29 21:32:09.982 | DEBUG    | __main__:get_link_to_ozon_page:99 - ISBN: 5-18-000887-5
+2020-12-29 21:32:09.983 | DEBUG    | __main__:get_link_to_ozon_page:111 - Ссылка на книгу Ozon: https://www.ozon.ru/product/pervobytnyy-chelovek-derem-silviya-219457380/
+2020-12-29 21:32:15.638 | DEBUG    | __main__:get_data:356 - Книга "Первобытный человек": https://www.labirint.ru/books/100171/
+2020-12-29 21:35:50.559 | DEBUG    | __main__:get_link_to_ozon_page:93 - Ссылка на страницу поиска книги: https://www.ozon.ru/search/?from_global=true&text=5-18-000887-5
+2020-12-29 21:36:06.030 | DEBUG    | __main__:get_link_to_ozon_page:99 - ISBN: 5-18-000887-5
+2020-12-29 21:36:06.032 | DEBUG    | __main__:get_link_to_ozon_page:111 - Ссылка на книгу Ozon: https://www.ozon.ru/product/pervobytnyy-chelovek-derem-silviya-219457380/?asb=0mf4QBccEjZ8laVfqZ6UGaGGhbCHI29anT%252FAeAYUJE4%253D
+2020-12-29 21:36:11.607 | DEBUG    | __main__:get_data:356 - Книга "Первобытный человек": https://www.labirint.ru/books/100171/
+2020-12-29 21:37:54.278 | DEBUG    | __main__:<module>:801 - Потрачено времени: 0:02:08.191117
+2020-12-29 21:37:54.278 | INFO     | __main__:<module>:802 - Книг обработано: 1/463
+2020-12-29 21:37:56.175 | DEBUG    | __main__:get_link_to_ozon_page:93 - Ссылка на страницу поиска книги: https://www.ozon.ru/search/?from_global=true&text=978-5-699-77745-7
+2020-12-29 21:38:01.600 | DEBUG    | __main__:get_data:356 - Книга "Сказки крольчихи Марты": https://www.labirint.ru/books/471444/
+2020-12-29 21:38:01.716 | DEBUG    | __main__:get_data:540 - ISBN: 978-5-699-77745-7
+2020-12-29 21:39:17.919 | DEBUG    | __main__:get_link_to_ozon_page:93 - Ссылка на страницу поиска книги: https://www.ozon.ru/search/?from_global=true&text=978-5-91631-061-0
+2020-12-29 21:39:33.888 | DEBUG    | __main__:get_data:356 - Книга "Грустное лицо комедии, или Наконец подведенные итоги": https://www.labirint.ru/books/386725/
+2020-12-29 21:39:34.087 | DEBUG    | __main__:get_data:540 - ISBN: 978-5-91631-061-0
+2020-12-29 21:58:41.838 | DEBUG    | __main__:get_link_to_ozon_page:93 - Ссылка на страницу поиска книги: https://www.ozon.ru/search/?from_global=true&text=978-5-17-084703-7
+2020-12-29 21:58:57.241 | DEBUG    | __main__:get_link_to_ozon_page:99 - ISBN: 978-5-17-084703-7
+2020-12-29 21:58:57.243 | DEBUG    | __main__:get_link_to_ozon_page:111 - Ссылка на книгу Ozon: https://www.ozon.ru/context/detail/id/28447998/
+2020-12-29 21:59:02.319 | DEBUG    | __main__:get_data:356 - Книга "Большая книга самых необходимых знаний для мальчиков": https://www.labirint.ru/books/446936/
+2020-12-29 22:03:23.198 | DEBUG    | __main__:get_link_to_ozon_page:93 - Ссылка на страницу поиска книги: https://www.ozon.ru/search/?from_global=true&text=978-5-17-084703-7
+2020-12-29 22:03:38.536 | DEBUG    | __main__:get_link_to_ozon_page:99 - ISBN: 978-5-17-084703-7
+2020-12-29 22:03:38.539 | DEBUG    | __main__:get_link_to_ozon_page:111 - Ссылка на книгу Ozon: https://www.ozon.ru/context/detail/id/28447998/?asb=b1hb3Q0AdmcrzE60VEQyK9Vqn7lJuWsZqqg5WAOapqo%253D
+2020-12-29 22:03:44.751 | DEBUG    | __main__:get_data:356 - Книга "Большая книга самых необходимых знаний для мальчиков": https://www.labirint.ru/books/446936/
+2020-12-29 22:19:05.504 | DEBUG    | __main__:get_link_to_ozon_page:93 - Ссылка на страницу поиска книги: https://www.ozon.ru/search/?from_global=true&text=978-5-699-88268-7
+2020-12-29 22:19:20.922 | DEBUG    | __main__:get_link_to_ozon_page:99 - ISBN: 978-5-699-88268-7
+2020-12-29 22:19:26.009 | DEBUG    | __main__:get_data:356 - Книга "Самостоятельный ребенок, или Как стать "ленивой мамой"": https://www.labirint.ru/books/529602/
+2020-12-29 22:25:42.052 | DEBUG    | __main__:get_link_to_ozon_page:93 - Ссылка на страницу поиска книги: https://www.ozon.ru/search/?from_global=true&text=978-5-699-88268-7
+2020-12-29 22:25:57.833 | DEBUG    | __main__:get_link_to_ozon_page:99 - ISBN: 978-5-699-88268-7

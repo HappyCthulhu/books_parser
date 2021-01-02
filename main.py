@@ -103,6 +103,7 @@ def get_link_to_ozon_page(isbn_code):
             if book_cheapest_page_link_element:
                 book_ozon_page_link = 'https://www.ozon.ru' + \
                                       book_cheapest_page_link_element[0].attrib['href']
+                logger.debug(f'Ссылка на книгу Ozon: {book_ozon_page_link}')
                 return book_ozon_page_link
             elif tree_ozon_search.xpath(OzonLocators.product_page_link):
                 book_ozon_page_link = 'https://www.ozon.ru' + \
@@ -733,7 +734,7 @@ for row in sheet_ranges.rows:
                 price_from_ozon = ''
 
             if price_from_ozon:
-                DATA_DICT['column_D_price'] = calculate_price_ozon_book_for_column_D(minimal_price, price_from_ozon)
+                DATA_DICT['column_D_price'] = int(calculate_price_ozon_book_for_column_D(minimal_price, price_from_ozon))
 
 
             elif site_locators == LabirintLocators:
@@ -744,14 +745,14 @@ for row in sheet_ranges.rows:
                 if DATA_DICT['old_price_with_discount_from_labirint']:
                     price_from_labirint = DATA_DICT['old_price_with_discount_from_labirint']
 
-                    DATA_DICT['column_D_price'] = calculate_price_labirint_book(minimal_price,
-                                                                                price_from_labirint)
+                    DATA_DICT['column_D_price'] = int(calculate_price_labirint_book(minimal_price,
+                                                                                price_from_labirint))
                 # если скидки нет, берем цену без скидки
                 elif DATA_DICT['price_without_discount_from_labirint']:
                     price_from_labirint = DATA_DICT['price_without_discount_from_labirint']
 
-                    DATA_DICT['column_D_price'] = calculate_price_labirint_book(minimal_price,
-                                                                                price_from_labirint)
+                    DATA_DICT['column_D_price'] = int(calculate_price_labirint_book(minimal_price,
+                                                                                price_from_labirint))
                 # если цены в Лабиринте нет, оставляем столбец D пустым
             #     else:
             #         DATA_DICT['column_D_price'] = ''
@@ -762,8 +763,8 @@ for row in sheet_ranges.rows:
 
             # столбец F
             if DATA_DICT.get('column_D_price'):
-                DATA_DICT['column_F_ozon_price'] = calculate_price_ozon_for_column_f(DATA_DICT['column_D_price'],
-                                                                                     volume)
+                DATA_DICT['column_F_ozon_price'] = calculate_price_ozon_for_column_f(int(DATA_DICT['column_D_price'],
+                                                                                     volume))
 
     # if not DATA_DICT.get('column_D_price'):
     #     DATA_DICT['column_F_ozon_price'] = ''
